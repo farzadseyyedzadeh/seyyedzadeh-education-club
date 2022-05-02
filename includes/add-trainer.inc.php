@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
-    $email = $name = $courses = '';
+    $email = $name = $courses = $age = '';
     define('REQUIRED_FIELD', 'This field is required');
     function cleanData($data)
     {
@@ -11,10 +11,12 @@ if (isset($_POST['submit'])) {
     }
     $email = cleanData($_POST['email']);
     $name = cleanData($_POST['name']);
+    $age = cleanData($_POST['age']);
     $courses = cleanData($_POST['courses']);
     session_start();
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $name;
+    $_SESSION['age'] = $age;
     $_SESSION['courses'] = $courses;
 
     if (empty($email)) {
@@ -31,6 +33,14 @@ if (isset($_POST['submit'])) {
     } else {
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
             $_SESSION['errors']['nameError'] = 'name is not valid';
+        } else {
+        }
+    }
+    if (empty($age)) {
+        $_SESSION['errors']['ageError'] = REQUIRED_FIELD;
+    } else {
+        if (!preg_match("/^[0-9]+$/", $age)) {
+            $_SESSION['errors']['ageError'] = 'age is not valid';
         } else {
         }
     }
@@ -51,10 +61,11 @@ if (isset($_POST['submit'])) {
         require 'dbh.inc.php';
         $email = mysqli_real_escape_string($conn, $email);
         $name = mysqli_real_escape_string($conn, $name);
+        $age = mysqli_real_escape_string($conn, $age);
         $courses = mysqli_real_escape_string($conn, $courses);
-        $sql = "INSERT INTO trainers(email,name,courses) VALUES(?,?,?);";
+        $sql = "INSERT INTO trainers(email,name,age,courses) VALUES(?,?,?,?);";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "sss", $email, $name, $courses);
+        mysqli_stmt_bind_param($stmt, "ssss", $email, $name,$age, $courses);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         mysqli_close($conn);

@@ -16,6 +16,7 @@ if (isset($_GET['id'])) {
     $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
     $email = isset($_SESSION['email']) ? $_SESSION['email'] : null;
     $name = isset($_SESSION['name']) ? $_SESSION['name'] : null;
+    $age = isset($_SESSION['age']) ? $_SESSION['age'] : null;
     $courses = isset($_SESSION['courses']) ? $_SESSION['courses'] : null;
 
 ?>
@@ -30,6 +31,9 @@ if (isset($_GET['id'])) {
             <label>Trainer Name</label>
             <input type="text" name="name" value=" <?= $trainer['name'] != null ?  $trainer['name']  : null; ?> ">
             <div class="red-text"> <?= isset($errors['nameError']) ? $errors['nameError'] : null; ?></div>
+            <label>Trainer Age</label>
+            <input type="text" name="age" value=" <?= $trainer['age'] != null ?  $trainer['age']  : null; ?> ">
+            <div class="red-text"> <?= isset($errors['ageError']) ? $errors['ageError'] : null; ?></div>
             <label>Courses (comma separated)</label>
             <input type="text" name="courses" value=" <?= $trainer['courses'] != null ?  $trainer['courses']  : null; ?> ">
             <div class="red-text"> <?= isset($errors['coursesError']) ? $errors['coursesError'] : null; ?></div>
@@ -62,6 +66,9 @@ if (isset($_GET['id'])) {
             <label>Trainer Name</label>
             <input type="text" name="name" value=" <?= $name != null ? $name : null; ?> ">
             <div class="red-text"> <?= isset($errors['nameError']) ? $errors['nameError'] : null; ?></div>
+            <label>Trainer Age</label>
+            <input type="text" name="age" value=" <?= $age != null ? $age : null; ?> ">
+            <div class="red-text"> <?= isset($errors['ageError']) ? $errors['ageError'] : null; ?></div>
             <label>Courses (comma separated)</label>
             <input type="text" name="courses" value=" <?= $courses != null ? $courses : null; ?> ">
             <div class="red-text"> <?= isset($errors['coursesError']) ? $errors['coursesError'] : null; ?></div>

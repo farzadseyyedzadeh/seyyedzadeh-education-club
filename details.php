@@ -30,7 +30,7 @@ if (isset($_GET['id'])) {
 <div class="container center">
     <?php if ($trainer) : ?>
         <h4><?= $trainer['name'] ?></h4>
-        <p>Created by: <?= $trainer['email'] ?></p>
+        <p>Created by: <?= $trainer['email'] ?> , who has <?= $trainer['age'] ?>years old</p>
         <p>Created at: <?= date($trainer['created_at']) ?></p>
         <h5>Courses</h5>
         <p><?= $trainer['courses'] ?></p>

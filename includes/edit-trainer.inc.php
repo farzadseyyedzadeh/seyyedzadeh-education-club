@@ -11,10 +11,12 @@ if (isset($_POST['update'])) {
     }
     $email = cleanData($_POST['email']);
     $name = cleanData($_POST['name']);
+    $age = cleanData($_POST['age']);
     $courses = cleanData($_POST['courses']);
     session_start();
     $_SESSION['email'] = $email;
     $_SESSION['name'] = $name;
+    $_SESSION['age'] = $age;
     $_SESSION['courses'] = $courses;
     if (empty($email)) {
         $_SESSION['errors']['emailError'] = REQUIRED_FIELD;
@@ -30,6 +32,14 @@ if (isset($_POST['update'])) {
     } else {
         if (!preg_match("/^[a-zA-Z-' ]*$/", $name)) {
             $_SESSION['errors']['nameError'] = 'name is not valid';
+        } else {
+        }
+    }
+    if (empty($age)) {
+        $_SESSION['errors']['ageError'] = REQUIRED_FIELD;
+    } else {
+        if (!preg_match("/^[0-9]+$/", $age)) {
+            $_SESSION['errors']['ageError'] = 'age is not valid';
         } else {
         }
     }
@@ -50,10 +60,11 @@ if (isset($_POST['update'])) {
         $id_to_update = htmlspecialchars($_POST['id_to_update']);
         $email = $_POST['email'];
         $name = $_POST['name'];
+        $age = $_POST['age'];
         $courses = $_POST['courses'];
-        $sql = "UPDATE trainers SET email = ? , name = ? , courses= ?  WHERE trainer_id = ?;";
+        $sql = "UPDATE trainers SET email = ? , name = ? ,age = ? , courses = ?  WHERE trainer_id = ?;";
         $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "sssi", $email, $name, $courses, $id_to_update);
+        mysqli_stmt_bind_param($stmt, "ssssi", $email, $name,$age, $courses, $id_to_update);
         mysqli_stmt_execute($stmt);
         mysqli_close($conn);
         session_unset();
