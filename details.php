@@ -33,6 +33,7 @@ if (isset($_GET['id'])) {
         <h6>who has <?= $trainer['age'] ?> years old</h6>
         <p>Created by: <?= $trainer['email'] ?></p>
         <p>Created at: <?= date($trainer['created_at']) ?></p>
+     <h5>Courses</h5>
         <h5>Courses</h5>
         <p><?= $trainer['courses'] ?></p>
         <form action="" method="POST">
